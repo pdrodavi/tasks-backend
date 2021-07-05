@@ -1,23 +1,27 @@
 pipeline {
-
+    
     agent any
-
+    
     stages {
-        stage ('Check') {
-            bat 'echo check'
+        
+        stage('Início') {
+            steps {
+                bat 'echo Início'
+            }
         }
+        
+        stage('Meio') {
+            steps {
+                bat 'echo Meio'
+            }
+        }
+        
+        stage('Fim') {
+            steps {
+                bat 'echo Fim'
+            }
+        }
+        
     }
-
-    stages {
-        stage ('Clone') {
-           bat 'echo Clone'
-       }
-    }
-
-    stages {
-        stage ('End') {
-           bat 'echo End'
-       }
-    }
-
+    
 }
