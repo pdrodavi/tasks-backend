@@ -18,9 +18,17 @@
 	<description>A very simple task management tool</description>
 
 	<properties>
-	  <sonar.projectKey>pdrodavi_tasks-backend</sonar.projectKey>
-	  <sonar.organization>pdrodavi</sonar.organization>
-	  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<java.version>1.8</java.version>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage/target/site/jacoco-aggregate-all/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.projectKey>pdrodavi_tasks-backend</sonar.projectKey>
+		<sonar.organization>pdrodavi</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.sources>src/main/</sonar.sources>
+		<sonar.tests>src/test/</sonar.tests>
+		<sonar.java.binaries>target/classes</sonar.java.binaries>
+		<sonar.junit.reportsPath>target/surefire-reports/TEST-*.xml</sonar.junit.reportsPath>
+		<sonar.coverage.exclusions>**/mvn/**,**/src/test/**, **/model/**,**Application.java</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
@@ -65,23 +73,22 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.2</version>
+				<version>0.8.5</version>
 				<executions>
 					<execution>
+						<id>prepare-agent</id>
 						<goals>
-							<goal>prepare-agent</goal>
+						  <goal>prepare-agent</goal>
 						</goals>
-					</execution>
-					<!-- attached to Maven test phase -->
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
+				      	</execution>
+				      <execution>
+					<id>report</id>
+					  <phase>prepare-package</phase>
+					  <goals>
+					    <goal>report</goal>
+					</goals>
+				      </execution>
 				</executions>
-
 			</plugin>
 		</plugins>
 	</build>	
